@@ -1,6 +1,7 @@
 from collections import defaultdict
 from abc import ABC, abstractmethod
 
+
 '''
     Iterator declaration area start from here
 '''
@@ -8,6 +9,7 @@ class SocialNetwork(ABC):
     @abstractmethod
     def createFriendsIterator(self, profileId):
         pass
+
 
 class SocialMedia(SocialNetwork):
     def __init__(self):
@@ -27,7 +29,8 @@ class SocialMedia(SocialNetwork):
     
     def createFriendsIterator(self, profileId):
         return SocialMediaIterator(self, profileId)
-    
+
+
 class ProfileIterator(ABC):
     @abstractmethod
     def getNext(self):
@@ -36,6 +39,7 @@ class ProfileIterator(ABC):
     @abstractmethod
     def hasMore(self):
         pass
+
 
 class SocialMediaIterator(ProfileIterator):
     def __init__(self, socialMedia: SocialMedia, profileId):
@@ -57,7 +61,8 @@ class SocialMediaIterator(ProfileIterator):
     
     def hasMore(self):
         return self.currentPosition < len(self.cache)
-    
+
+
 class Profile:
     def __init__(self, id, email):
         self.id = id
@@ -82,8 +87,10 @@ class SocialGetter:
         
         return info_list
 
+
 class Application:
     def __init__(self):
+        # to request the data structure from the social network
         self.getter = SocialGetter()
         self.network = SocialMedia()
     
@@ -91,8 +98,10 @@ class Application:
         iterator = self.network.createFriendsIterator(profile.getId())
         return self.getter.get(iterator)
 
+
 if __name__ == "__main__":
 # Example usage
+    # start of the application -> calls the application interface
     app = Application()
     app.network.setProfile("1", "profile1@example.com")
     app.network.setProfile("2", "profile2@example.com")
