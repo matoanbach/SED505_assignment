@@ -1,3 +1,13 @@
+
+**Run:**
+
+```sh
+mkdir build && cd build
+cmake ..
+make
+./AutoDrivingSystem
+```
+
 1. Compare and contrast standard design patterns with machine learning design patterns. Find one similarity and one difference.
 
 - Similarity:
