@@ -1,3 +1,0 @@
-/Users/bachmatoan/Library/CloudStorage/OneDrive-Seneca/Seneca/SEMESTER5/SED505/assignment/a5/build/CMakeFiles/AutoDrivingSystem.dir
-/Users/bachmatoan/Library/CloudStorage/OneDrive-Seneca/Seneca/SEMESTER5/SED505/assignment/a5/build/CMakeFiles/edit_cache.dir
-/Users/bachmatoan/Library/CloudStorage/OneDrive-Seneca/Seneca/SEMESTER5/SED505/assignment/a5/build/CMakeFiles/rebuild_cache.dir
