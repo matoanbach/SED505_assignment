@@ -41,6 +41,7 @@ struct GPSData {
 };
 
 // Haversine function to calculate the distance between two GPS coordinates
+// Link for reference: https://community.esri.com/t5/coordinate-reference-systems-blog/distance-on-a-sphere-the-haversine-formula/ba-p/902128
 double haversine(double lat1, double lon1, double lat2, double lon2) {
     // Radius of Earth in km
     double R = 6371.0;
@@ -69,6 +70,7 @@ double haversine(double lat1, double lon1, double lat2, double lon2) {
 }
 
 // Function to calculate bearing from current location to destination
+// formula: bearing=atan2(sin(Δlon)⋅cos(lat2),cos(lat1)⋅sin(lat2)−sin(lat1)⋅cos(lat2)⋅cos(Δlon))
 double calculateBearing(double lat1, double lon1, double lat2, double lon2) {
     // Convert latitudes and longitudes from degrees to radians
     lat1 = lat1 * M_PI / 180.0;
@@ -318,21 +320,21 @@ void AutonomousDrivingSystem::runSimulation() {
     cout << "You need to travel at " << bearing << " degrees.\n\n";
 
     while (!controlModule.hasArrived() && controlModule.getHoursDriven() < 24) {
-        // Increment the perception module timer
-        perceptionModule.incrementTime();
+        // PERCEPTION
+        perceptionModule.incrementTime(); //  Increment the perception module timer
 
-        // Process sensor data
-        perceptionModule.processCameraData(cameraData);
-        perceptionModule.processLidarData(lidarData);
+        // PERCEPTION
+        perceptionModule.processCameraData(cameraData); // process CAMERA
+        perceptionModule.processLidarData(lidarData);   // process LIDAR
 
-        // Update the route based on new sensor data
-        planningModule.updateRoute(cameraData, lidarData);
+        // PLANNING 
+        planningModule.updateRoute(cameraData, lidarData); // Update the route based on new sensor data
 
-        // Adjust speed and direction based on sensor data and planning
-        controlModule.adjustSpeedAndDirection(cameraData, lidarData, planningModule);
+        // CONTROL
+        controlModule.adjustSpeedAndDirection(cameraData, lidarData, planningModule); // Adjust speed and direction based on sensor data and planning
 
-        // Update GPS data
-        perceptionModule.processGPSData(controlModule.getGPSData(), controlModule.getSpeed(), controlModule.getDirection());
+        // PERCEPTION
+        perceptionModule.processGPSData(controlModule.getGPSData(), controlModule.getSpeed(), controlModule.getDirection()); // Update GPS data
 
         // Output status
         GPSData& gpsData = controlModule.getGPSData();
